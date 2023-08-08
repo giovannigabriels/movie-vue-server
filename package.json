@@ -4,6 +4,8 @@
   "description": "CMS Integration - Server",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
+    "dev":"nodemon app.js",
     "test": "jest"
   },
   "repository": {

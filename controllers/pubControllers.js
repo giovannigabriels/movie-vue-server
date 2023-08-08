@@ -138,17 +138,26 @@ class Controller {
     try {
       const { link } = req.query;
       const { data } = await axios({
-        method: "get",
-        url: "https://api.happi.dev/v1/qrcode",
-        headers: {
-          "x-happi-key":
-            "f4d0b4Lr6xpB0lu2xAByOusvZWphICiGqmwkZFkssgFN22zyStWE34yh",
+        method: "post",
+        url: "https://qrtiger.com/api/qr/static",
+        data:{
+          "size": 500,
+          "colorDark": "rgb(5,64,128)",
+          "logo": "scan_me.png",
+          "eye_outer": "eyeOuter2",
+          "eye_inner": "eyeInner1",
+          "qrData": "pattern0",
+          "backgroundColor": "rgb(255,255,255)",
+          "transparentBkg": false,
+          "qrCategory": "url",
+          "text": `${link}`
         },
-        params: {
-          data: link,
+        headers: {
+          "Authorization":
+            `Bearer ${process.env.API_KEY_QR_TIGER}`,
         },
       });
-      res.status(200).json(data.qrcode);
+      res.status(200).json(data.url);
     } catch (error) {
       next(error);
     }

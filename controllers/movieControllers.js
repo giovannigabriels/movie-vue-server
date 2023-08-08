@@ -29,6 +29,7 @@ class Controller {
     try {
       const result = await Movie.findAll({
         include: [User, Genre],
+        order:['createdAt', 'ASC']
       });
       res.status(200).json(result);
     } catch (error) {
